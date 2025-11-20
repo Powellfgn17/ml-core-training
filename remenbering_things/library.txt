@@ -1,3 +1,2 @@
-{'name': 'ds', 'author': 'dfsz', 'genre': 'sdz', 'year': '25'}
 {'name': 'fdza', 'author': 'fda', 'genre': 'fdn', 'year': '58'}
-{'name': 'ds', 'author': 'ds', 'genre': 'vt', 'year': '45'}
+{'name': 'papa', 'author': 'maman', 'genre': 'couple', 'year': '2006'}

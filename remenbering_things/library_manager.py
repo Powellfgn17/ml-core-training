@@ -65,67 +65,76 @@ def check_library_info():
     borrowed_books = sum(1 for line in borrow_lines if line.strip() != "[]")
 
     print("Number of borrowed books:", borrowed_books) 
-print(
-    "1- Search book(s) by name or author or genre or year\n"
-    "2- Add book(s)\n"
-    "3- Borrow book(s)\n"
-    "4- Give back book(s)\n"
-    "5- List book(s)\n"
-    "6- Check library info\n"
-    "7- Delete book(s)\n"
-)
-
-option = int(input("Choose a number of what you want : "))
-
-if option == 2:
-    name = input("Enter the book name : ")
-    author = input("Enter the book author : ")
-    genre = input("Enter the book genre : ")
-    year = input("Enter the book year : ")
-    add_save_book(name, author, genre, year)
-
-elif option == 5:
-    list_books()
-
-elif option == 3:
-    list_books()
-    name = input("Enter the book name you want to borrow : ")
-    borrow_book(name)
-
-elif option == 4:
-    list_books()
-    name = input("Enter the book name you want to give back : ")
-    print("You've given back the book :", name)
-    give_back_book(name)
-elif option == 6:
-    check_library_info()
-elif option == 1:
-    criterion = input("Search by name, author, genre, or year: ").strip().lower()
-    value = input(f"Enter the {criterion} to search for: ").strip().lower()
-
-    with open("library.txt", "r") as file:
-        books = file.readlines()
-
-    matching_books = []
-    for book in books:
-        book_dict = eval(book.strip())
-        if criterion in book_dict and str(book_dict[criterion]).lower() == value:
-            matching_books.append(book_dict)
-
-    if matching_books:
-        print("Matching books found:")
-        for book in matching_books:
-            print(book)
-    else:
-        print("No matching books found.")
-
-elif option == 7:
-    name = input("Enter the book name you want to delete : ")
-    with open("library.txt", "r") as file:
-        books = file.readlines()
-    with open("library.txt", "w") as file:
+    
+while (True):
+    print(
+        "\n"
+        "1- Search book(s) by name or author or genre or year\n"
+        "2- Add book(s)\n"
+        "3- Borrow book(s)\n"
+        "4- Give back book(s)\n"
+        "5- List book(s)\n"
+        "6- Check library info\n"
+        "7- Delete book(s)\n"
+        "8- Exit"
+    )
+    
+    option = int(input("Choose a number of what you want : "))
+    
+    if option == 2:
+        name = input("Enter the book name : ")
+        author = input("Enter the book author : ")
+        genre = input("Enter the book genre : ")
+        year = input("Enter the book year : ")
+        add_save_book(name, author, genre, year)
+    
+    elif option == 5:
+        list_books()
+    
+    elif option == 3:
+        list_books()
+        name = input("Enter the book name you want to borrow : ")
+        borrow_book(name)
+    
+    elif option == 4:
+        list_books()
+        name = input("Enter the book name you want to give back : ")
+        print("You've given back the book :", name)
+        give_back_book(name)
+    elif option == 6:
+        check_library_info()
+    elif option == 1:
+        criterion = input("Search by name, author, genre, or year: ").strip().lower()
+        value = input(f"Enter the {criterion} to search for: ").strip().lower()
+    
+        with open("library.txt", "r") as file:
+            books = file.readlines()
+    
+        matching_books = []
         for book in books:
             book_dict = eval(book.strip())
-            if book_dict["name"] != name:
-                file.write(str(book_dict) + "\n")
-    print(f"The book '{name}' has been deleted from the library.")
+            if criterion in book_dict and str(book_dict[criterion]).lower() == value:
+                matching_books.append(book_dict)
+    
+        if matching_books:
+            print("Matching books found:")
+            for book in matching_books:
+                print(book)
+        else:
+            print("No matching books found.")
+    
+    elif option == 7:
+        name = input("Enter the book name you want to delete : ")
+        with open("library.txt", "r") as file:
+            books = file.readlines()
+        with open("library.txt", "w") as file:
+            for book in books:
+                book_dict = eval(book.strip())
+                if book_dict["name"] != name:
+                    file.write(str(book_dict) + "\n")
+        print(f"The book '{name}' has been deleted from the library.")
+    elif option == 8:
+        print("Thank you, and see you soon")
+        break
+    else :
+        print("Nothing to do, choose a number between 1 - 8.")
